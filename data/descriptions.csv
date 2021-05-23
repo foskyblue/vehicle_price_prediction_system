@@ -7,7 +7,7 @@ vin,The VIN number of the vehicle
 licensePlate, The license plate number of the vehicle
 price,The price a client is willing to see a vehicle
 createdBy,Ad creator
-marketplacePrice,The official price of the vehicle with a 15,000 naira increase of the vehicle price
+marketplacePrice,The official price of the vehicle with a 15000 naira increase of the vehicle price
 marketplaceVisible,If the vehicle ad is visible on the webpage or not
 marketplaceVisibleDate,The date that the ad was made visible on the website
 ownerId,Ad owner ID
