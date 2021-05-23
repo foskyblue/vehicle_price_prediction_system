@@ -1,0 +1,41 @@
+feature,description
+id,Unique ad ID
+year,The year the vehicle was produced
+insured,If the car has insurance or not
+mileage,Total vehicle mileage
+vin,The VIN number of the vehicle
+licensePlate, The license plate number of the vehicle
+price,The price a client is willing to see a vehicle
+createdBy,Ad creator
+marketplacePrice,The official price of the vehicle with a 15,000 naira increase of the vehicle price
+marketplaceVisible,If the vehicle ad is visible on the webpage or not
+marketplaceVisibleDate,The date that the ad was made visible on the website
+ownerId,Ad owner ID
+model_name,Vehicle model
+model_brand_name,Make of vehicle
+state,The state where the vehicle is located
+country,The country where the vehicle is located
+address,The address where the vehicle is located
+carManagerId,Unique car manager ID
+ownerType,If the car is owned by an indivisual or not
+transmission,Vehicle transmission type
+fuelType,Vehicle fuel type
+sellingCondition,Selling condition of the vehicle
+bodyType,Vehicle body type
+city,The city where the vehicle is located
+marketplaceOldPrice,Vehicle old price if updated
+createdAt,The date that the ad was created
+mileageUnit,Vehicle mileage unit
+hasWarranty,Vehicle warranty
+interiorColor,Vehicle interior color
+exteriorColor,Vehicle exterior color
+engineType,Vehicle engine type
+gradeScore,Vehicle score rating
+installment,Vehicle payment in installment
+depositReceived,Indicated if a deposit is required for vehicle purchase
+isFirstOwner,A check if the vehicle has been used or not
+firstOwnerName,Vehicle first owner name
+firstOwnerPhone,Contact of vehicle's first owner
+loanValue
+websiteUrl,Vehicle's website url link
+hasThreeDImage,Vehicle has 3D image or not
