@@ -12,16 +12,6 @@ To run this project, you can clone this repository onto your local machine and f
 
 The version of python used is python 3.8.8. 
 
-Other libraries needed to successfully run this project includes:
-
-1. Pandas
-2. Numpy
-3. Matplotlib
-4. Plotly
-5. Flask
-6. Sqlite3
-7. Nltk
-
 Also, you can use the requirements.txt file above.
 
 #### To run the project locally:
