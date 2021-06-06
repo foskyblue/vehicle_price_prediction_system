@@ -70,7 +70,11 @@ Other files included will be for deploying the web app to the Heroku cloud servi
 ## Analysis & Results <a name="analysis&results"></a>
 
 An extensive data analysis and all the results can be seen in the jupyter notebook file: vehicle_price_prediction.ipynb
- 
+
+![index1](https://user-images.githubusercontent.com/16907846/120944069-804cc200-c72a-11eb-8098-dc479d4bdc8b.JPG)
+![index2](https://user-images.githubusercontent.com/16907846/120944075-8347b280-c72a-11eb-968e-e71b70681f3a.JPG)
+![index3](https://user-images.githubusercontent.com/16907846/120944139-c99d1180-c72a-11eb-9044-00c2804d64dd.JPG)
+
 
 ## Licensing, Authors, Acknowledgements<a name="licensing"></a>
 
