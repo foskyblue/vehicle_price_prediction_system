@@ -55,7 +55,6 @@ There are thousands of vehicles being sold locally each day in Nigeria. However,
 
 This project is made up of 3 folders, app, data and models.
 
-```
 * app
     * templates
         * go.html - prediction result template
@@ -74,7 +73,6 @@ This project is made up of 3 folders, app, data and models.
     * vehicle_price_prediction.pkl - saved pickle file that will be used for prediction
     * train_classifier.py - train machine learning model
 
-```
 
 Other files included will be for deploying the web app to the Heroku cloud service.
 
