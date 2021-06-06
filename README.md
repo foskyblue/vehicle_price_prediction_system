@@ -61,6 +61,7 @@ This project is made up of 3 folders, app, data and models.
         * master.html - index template
     * figures.py - plots using Plotly
     * load.py - responsible for loading sqlite3 database, dataframe and pickle files
+    * Recommender.py - a knowledge based recommender engine class
     * run.py - main program
 
 * data
