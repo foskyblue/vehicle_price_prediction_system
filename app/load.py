@@ -18,6 +18,6 @@ def load_model():
     :return: Pickled file used for prediction
     """
     # load model
-    model = joblib.load("models/vehicle_price_prediction_pickle.pkl")
+    model = joblib.load("models/vehicle_price_prediction.pkl")
 
     return model

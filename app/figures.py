@@ -55,7 +55,7 @@ def load_figures():
             'layout': {
                 'title': 'Distribution of Vehicles by year',
                 'yaxis': {
-                    'title': "Count"
+                    'title': "Frequency"
                 },
                 'xaxis': {
                     'title': "Year"

@@ -26,7 +26,7 @@
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li><a target="_blank" href="/html_table">Data table</a></li>
-                <li><a target="_blank" href="https://github.com/foskyblue/vehicle_price_prediction">Github</a></li>
+                <li><a target="_blank" href="https://github.com/foskyblue/vehicle_price_prediction_system">Github</a></li>
                 <li><a target="_blank" href="https://www.linkedin.com/in/ufuoma-ubor-3a872916a/">LinkedIn</a></li>
             </ul>
         </div>
@@ -48,7 +48,11 @@
                         <div class="form-group col-md-4">
                             <label for="inputState">Make</label>
                             <select name="model_brand_name" id="model_brand_name" class="form-control" required>
-                              <option value="">Choose...</option>
+                              {% if request.args.get('mileage', '') %}
+                                <option value="{{ request.args.get('model_brand_name', '') }}">{{ request.args.get('model_brand_name', '') }}</option>
+                              {% else %}
+                                <option value="">Choose...</option>
+                              {% endif %}
                               <option value="acura">Acura</option>
                               <option value="audi">Audi</option>
                               <option value="bmw">Bmw</option>
@@ -106,15 +110,22 @@
                         <div class="form-group col-md-4">
                             <label for="inputState">Model</label>
                             <select name="model_name" id="model_name" class="form-control" required>
-                              <option value="">Choose...</option>
-                              <!-- <option value="">...</option> -->
+                              {% if request.args.get('mileage', '') %}
+                                <option value="{{ request.args.get('model_name', '') }}">{{ request.args.get('model_name', '') }}</option>
+                              {% else %}
+                                <option value="">Choose...</option>
+                              {% endif %}
                             </select>
                         </div>
 
                         <div class="form-group col-md-4">
                             <label for="inputState">Year</label>
                             <select name="year" id="year" class="form-control" required>
-                              <option value="">Choose...</option>
+                              {% if request.args.get('mileage', '') %}
+                                <option value="{{ request.args.get('year', '') }}">{{ request.args.get('year', '') }}</option>
+                              {% else %}
+                                <option value="">Choose...</option>
+                              {% endif %}
                               <option value="1970">1970</option>
                               <option value="1984">1984</option>
                               <option value="1985">1985</option>
@@ -160,16 +171,28 @@
                         <div class="form-group col-md-4">
                             <label for="inputState">Transmission</label>
                             <select name="transmission" id="transmission" class="form-control" required>
-                              <option value="">Choose...</option>
-                              <option value="Automatic">Automatic</option>
-                              <option value="Manual">Manual</option>
+                              {% if request.args.get('mileage', '') %}
+                                <option value="{{ request.args.get('transmission', '') }}">{{ request.args.get('transmission', '') }}</option>
+                              {% else %}
+                                <option value="">Choose...</option>
+                              {% endif %}{% if request.args.get('mileage', '') %}
+                                <option value="{{ request.args.get('transmission', '') }}">{{ request.args.get('transmission', '') }}</option>
+                              {% else %}
+                                <option value="">Choose...</option>
+                              {% endif %}
+                              <option value="automatic">Automatic</option>
+                              <option value="manual">Manual</option>
                             </select>
                         </div>
 
                         <div class="form-group col-md-4">
                             <label for="inputState">Engine Type</label>
                             <select name="engine_type" id="engine_type" class="form-control" required>
-                              <option value="">Choose...</option>
+                              {% if request.args.get('mileage', '') %}
+                                <option value="{{ request.args.get('engine_type', '') }}">{{ request.args.get('engine_type', '') }}</option>
+                              {% else %}
+                                <option value="">Choose...</option>
+                              {% endif %}
                               <option value="10-cylinder(v10)">10-cylinder(v10)</option>
                               <option value="12-cylinder(v12)">12-cylinder(v12)</option>
                               <option value="18-cylinder(v18)">18-cylinder(v18)</option>
@@ -188,7 +211,11 @@
                         <div class="form-group col-md-4">
                             <label for="inputState">Body Type</label>
                             <select name="body_type" id="body_type" class="form-control" required>
-                              <option value="">Choose...</option>
+                              {% if request.args.get('mileage', '') %}
+                                <option value="{{ request.args.get('body_type', '') }}">{{ request.args.get('body_type', '') }}</option>
+                              {% else %}
+                                <option value="">Choose...</option>
+                              {% endif %}
                               <option value="bus">Bus</option>
                               <option value="convertible">Convertible</option>
                               <option value="coupe">Coupe</option>
@@ -208,13 +235,17 @@
                     <div class="form-group">
                         <div class="form-group col-md-4">
                             <label for="inputState">Mileage</label>
-                            <input id="mileage" name="mileage" type="text" class="form-control" required>
+                            <input id="mileage" value="{{ request.args.get('mileage', '') }}" name="mileage" type="text" class="form-control" required>
                         </div>
 
                         <div class="form-group col-md-4">
                             <label for="inputState">Mileage Unit</label>
                             <select name="mileage_unit" id="mileage_unit" class="form-control" required>
-                              <option value="">Choose...</option>
+                              {% if request.args.get('mileage', '') %}
+                                <option value="{{ request.args.get('mileage_unit', '') }}">{{ request.args.get('mileage_unit', '') }}</option>
+                              {% else %}
+                                <option value="">Choose...</option>
+                              {% endif %}
                               <option value="km">Kilometers</option>
                               <option value="miles">Miles</option>
                             </select>
@@ -223,7 +254,11 @@
                         <div class="form-group col-md-4">
                             <label for="inputState">Fuel Type</label>
                             <select name="fuel_type" id="fuel_type" class="form-control" required>
-                              <option value="">Choose...</option>
+                              {% if request.args.get('mileage', '') %}
+                                <option value="{{ request.args.get('fuel_type', '') }}">{{ request.args.get('fuel_type', '') }}</option>
+                              {% else %}
+                                <option value="">Choose...</option>
+                              {% endif %}
                               <option value="diesel">Diesel</option>
                               <option value="petrol">Petrol</option>
                             </select>
@@ -233,7 +268,11 @@
                         <div class="form-group col-md-4">
                             <label for="inputState">Grade Score</label>
                             <select name="grade_score" id="grade_score" class="form-control" required>
-                              <option value="">Choose...</option>
+                              {% if request.args.get('mileage', '') %}
+                                <option value="{{ request.args.get('grade_score', '') }}">{{ request.args.get('grade_score', '') }}</option>
+                              {% else %}
+                                <option value="">Choose...</option>
+                              {% endif %}
                               <option value="1">1</option>
                               <option value="2">2</option>
                               <option value="3">3</option>
@@ -245,16 +284,24 @@
                         <div class="form-group col-md-4">
                             <label for="inputState">First Owner</label>
                             <select name="first_owner" id="first_owner" class="form-control" required>
-                              <option value="">Choose...</option>
-                              <option value="True">True</option>
-                              <option value="False">False</option>
+                              {% if request.args.get('mileage', '') %}
+                                <option value="{{ request.args.get('first_owner', '') }}">{{ request.args.get('first_owner', '') }}</option>
+                              {% else %}
+                                <option value="">Choose...</option>
+                              {% endif %}
+                              <option value="true">True</option>
+                              <option value="false">False</option>
                             </select>
                         </div>
 
                         <div class="form-group col-md-4">
                             <label for="inputState">Selling Condition</label>
                             <select name="selling_condition" id="selling_condition" class="form-control" required>
-                              <option value="">Choose...</option>
+                              {% if request.args.get('mileage', '') %}
+                                <option value="{{ request.args.get('selling_condition', '') }}">{{ request.args.get('selling_condition', '') }}</option>
+                              {% else %}
+                                <option value="">Choose...</option>
+                              {% endif %}
                               <option value="foreign">Foreign</option>
                               <option value="local">Local</option>
                               <option value="new">New</option>
@@ -266,43 +313,35 @@
                         <div class="form-group col-md-4">
                             <label for="inputState">Interior Color</label>
                             <select name="interior_color" id="interior_color" class="form-control" required>
-                              <option value="">Choose...</option>
+                              {% if request.args.get('mileage', '') %}
+                                <option value="{{ request.args.get('interior_color', '') }}">{{ request.args.get('interior_color', '') }}</option>
+                              {% else %}
+                                <option value="">Choose...</option>
+                              {% endif %}
                               <option value="almond">Almond</option>
                               <option value="ash">Ash</option>
-                              <option value="ash colour">Ash colour</option>
                               <option value="ash & grey">Ash & grey</option>
-                              <option value="ashley">Ashley</option>
                               <option value="beige">Beige</option>
-                              <option value="biege and black">Biege and black</option>
+                              <option value="beige and black">Beige & black</option>
                               <option value="black">Black</option>
+                              <option value="black & blue">Black & blue</option>
                               <option value="black & brown">Black & brown</option>
                               <option value="black & grey">Black & grey</option>
                               <option value="black & maroon">Black & maroon</option>
-                              <option value="black & beige">Black & beige</option>
-                              <option value="black & cream">Black & cream</option>
                               <option value="black & orange">Black & orange</option>
                               <option value="black & red">Black & red</option>
-                              <option value="black & wine">Black & wine</option>
-                              <option value="black & blue">Black & blue</option>
                               <option value="blue">Blue</option>
+                              <option value="blue & grey">Blue & grey</option>
                               <option value="brown">Brown</option>
                               <option value="cream">Cream</option>
                               <option value="cream & ash">Cream & ash</option>
-                              <option value="dark green">Dark green</option>
-                              <option value="dark grey">Dark grey</option>
-                              <option value="dark grey and blue">Dark grey & blue</option>
-                              <option value="dotted black grey">Dotted black grey</option>
+                              <option value="cream & black">Cream & black</option>
                               <option value="gold">Gold</option>
+                              <option value="green">Green</option>
                               <option value="grey">Grey</option>
-                              <option value="grey & blue">Grey & blue</option>
-                              <option value="grey & orange">Grey & orange</option>
                               <option value="ivory">Ivory</option>
-                              <option value="light brown">Light brown</option>
-                              <option value="light grey">Light grey</option>
-                              <!-- <option value="Maroon">Maroon</option> -->
+                              <option value="Maroon">Maroon</option>
                               <option value="off-white">Off-white</option>
-                              <option value="off-white & black">Off-white & black</option>
-                              <option value="off white & black">Off white & black</option>
                               <option value="orange">Orange</option>
                               <option value="parchment">Parchment</option>
                               <option value="pearl">Pearl</option>
@@ -310,65 +349,14 @@
                               <option value="silver">Silver</option>
                               <option value="tan">Tan</option>
                               <option value="white">White</option>
-                              <option value="wine">Wine</option>
+                              <option value="white & black">White & black</option>
+                              <option value="white & brown">White & brown</option>
                               <option value="yellow">Yellow</option>
                               <option value="other">Other</option>
                             </select>
                         </div>
 
-                        <div class="form-group col-md-4">
-                            <label for="inputState">Exterior Color</label>
-                            <select name="exterior_color" id="exterior_color" class="form-control" required>
-                              <option value="">Choose...</option>
-                              <option value="almond">Almond</option>
-                              <option value="ash">Ash</option>
-                              <option value="ash colour">Ash colour</option>
-                              <option value="ash & grey">Ash & grey</option>
-                              <option value="ashley">Ashley</option>
-                              <option value="beige">Beige</option>
-                              <option value="biege and black">Biege and black</option>
-                              <option value="black">Black</option>
-                              <option value="black & brown">Black & brown</option>
-                              <option value="black & grey">Black & grey</option>
-                              <option value="black & maroon">Black & maroon</option>
-                              <option value="black & beige">Black & beige</option>
-                              <option value="black & cream">Black & cream</option>
-                              <option value="black & orange">Black & orange</option>
-                              <option value="black & red">Black & red</option>
-                              <option value="black & wine">Black & wine</option>
-                              <option value="black & blue">Black & blue</option>
-                              <option value="blue">Blue</option>
-                              <option value="brown">Brown</option>
-                              <option value="cream">Cream</option>
-                              <option value="cream & ash">Cream & ash</option>
-                              <option value="dark green">Dark green</option>
-                              <option value="dark grey">Dark grey</option>
-                              <option value="dark grey and blue">Dark grey & blue</option>
-                              <option value="dotted black grey">Dotted black grey</option>
-                              <option value="gold">Gold</option>
-                              <option value="grey">Grey</option>
-                              <option value="grey & blue">Grey & blue</option>
-                              <option value="grey & orange">Grey & orange</option>
-                              <option value="ivory">Ivory</option>
-                              <option value="light brown">Light brown</option>
-                              <option value="light grey">Light grey</option>
-                              <!-- <option value="Maroon">Maroon</option> -->
-                              <option value="off-white">Off-white</option>
-                              <option value="off-white & black">Off-white & black</option>
-                              <option value="off white & black">Off white & black</option>
-                              <option value="orange">Orange</option>
-                              <option value="parchment">Parchment</option>
-                              <option value="pearl">Pearl</option>
-                              <option value="red">Red</option>
-                              <option value="silver">Silver</option>
-                              <option value="tan">Tan</option>
-                              <option value="white">White</option>
-                              <option value="wine">Wine</option>
-                              <option value="yellow">Yellow</option>
-                              <option value="other">Other</option>
-                            </select>
-                        </div>
-                            <!-- <button type="submit" class="btn btn-success">Predict</button> -->
+                        
                     </div>
                     <div class="form-row">
                         <button type="submit" class="btn btn-success form-control">Predict</button>
