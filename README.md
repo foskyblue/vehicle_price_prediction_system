@@ -35,6 +35,7 @@ Also, you can use the requirements.txt file above.
     ```
     python app.py
     ```
+Then access the web app locally via: http://127.0.0.1:5000/
 
 ## Project Motivation<a name="motivation"></a>
 
