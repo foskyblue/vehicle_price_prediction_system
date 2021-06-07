@@ -8,7 +8,6 @@ import pandas as pd
 from flask import Flask
 from flask import render_template, request, jsonify
 from plotly.graph_objs import Bar
-from sqlalchemy import create_engine
 from load import load_data, load_model
 from figures import load_figures
 
