@@ -8,7 +8,7 @@
 
 ## Installation <a name="installation"></a>
 
-To run this project, you can clone this repository onto your local machine and follow the instructions below to run locally. Also, you can access the web app [here]().
+To run this project, you can clone this repository onto your local machine and follow the instructions below to run locally. Also, you can access the web app [here](https://naija-vehicle-price-prediction.herokuapp.com/).
 
 The version of python used is python 3.8.8. 
 
@@ -33,7 +33,7 @@ Also, you can use the requirements.txt file above.
 5. Run the command to start the web app locally:
 
     ```
-    python app/app.py
+    python app.py
     ```
 
 ## Project Motivation<a name="motivation"></a>
@@ -43,16 +43,21 @@ There are thousands of vehicles being sold locally each day in Nigeria. However,
 
 ## File Descriptions <a name="files"></a>
 
-This project is made up of 3 folders, app, data and models.
+This project is made up of 2 folders, app, data and models.
 
-* app
-    * templates
-        * go.html - prediction result template
-        * master.html - index template
-    * figures.py - plots using Plotly
-    * load.py - responsible for loading sqlite3 database, dataframe and pickle files
-    * Recommender.py - a knowledge based recommender engine class
-    * run.py - main program
+We have the following files/folder in the root folder
+
+* templates
+    * go.html - prediction result template
+    * master.html - index template
+* figures.py - plots using Plotly
+* load.py - responsible for loading sqlite3 database, dataframe and pickle files
+* Recommender.py - a knowledge based recommender engine class
+* run.py - main program
+* Procfile - heroku deployment file
+* requirements.txt - requirements file for heroku
+* runtime.txt - heroku deployment file
+* vehicle_price_prediction.ipynb - jupyter notebook file
 
 * data
     * cars.csv - cars listed for sale on the Autochek [website](https://autochek.africa/ng)
