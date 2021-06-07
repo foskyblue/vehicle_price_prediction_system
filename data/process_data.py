@@ -93,7 +93,7 @@ def clean_data(df):
 
     # save csv to html table
     print('Saving dataframe to html table...')
-    df.to_html("app/templates/html_table.html")
+    df.to_html("templates/html_table.html")
 
     df = pd.get_dummies(df)
     
