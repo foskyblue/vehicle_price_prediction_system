@@ -33,7 +33,7 @@ Also, you can use the requirements.txt file above.
 5. Run the command to start the web app locally:
 
     ```
-    python app/run.py
+    python app/app.py
     ```
 
 ## Project Motivation<a name="motivation"></a>
