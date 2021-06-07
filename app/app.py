@@ -24,8 +24,8 @@ model = load_model()
 
 
 # index webpage displays cool visuals and receives user input text for model
-@app.route('/')
 @app.route('/index')
+@app.route('/')
 def index():
 
     # load figures and ids
