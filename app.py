@@ -106,7 +106,7 @@ def go():
     vehicles_df_dtypes = ['model_name', 'model_brand_name', 'transmission', 'fuelType', 'sellingCondition', 'bodyType', 'engineType']
 
     for t in vehicles_df_dtypes:
-        vehicles_df[t] = vehicles_df[t].apply(lambda row: row.lower())
+        vehicles_df[t] = vehicles_df[t].apply(lambda row: row.strip().lower())
 
     recommender_engine = RecommendationEngine()
 
