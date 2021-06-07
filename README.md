@@ -27,7 +27,7 @@ Also, you can use the requirements.txt file above.
 4. Run the command to train a classifier and save the results to a pickle file.: 
    
    ```
-   python models/train_classifier.py data/disaster_response.db models/disaster_response_pickle.pkl 
+   python models/train_classifier.py data/vehicle_price_prediction.db models/vehicle_price_prediction.pkl 
    ```
 
 5. Run the command to start the web app locally:

@@ -96,8 +96,6 @@ def main():
         print('Training model...')
         model.fit(x_train, y_train)
 
-        print('Best params ', model.best_params_)
-
         print('Evaluating model...')
         evaluate_model(model, x_test, y_test, x_train, y_train)
 
