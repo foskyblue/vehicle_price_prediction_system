@@ -171,11 +171,7 @@
                         <div class="form-group col-md-4">
                             <label for="inputState">Transmission</label>
                             <select name="transmission" id="transmission" class="form-control" required>
-                              {% if request.args.get('mileage', '') %}
-                                <option value="{{ request.args.get('transmission', '') }}">{{ request.args.get('transmission', '') }}</option>
-                              {% else %}
-                                <option value="">Choose...</option>
-                              {% endif %}{% if request.args.get('mileage', '') %}
+                              {% if request.args.get('transmission', '') %}
                                 <option value="{{ request.args.get('transmission', '') }}">{{ request.args.get('transmission', '') }}</option>
                               {% else %}
                                 <option value="">Choose...</option>
