@@ -1,0 +1,898 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Vehicle Price Prediction</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">Vehicle Price Prediction Project</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a target="_blank" href="/html_table">Data table</a></li>
+                <li><a target="_blank" href="https://github.com/foskyblue/vehicle_price_prediction_system">Github</a></li>
+                <li><a target="_blank" href="https://www.linkedin.com/in/ufuoma-ubor-3a872916a/">LinkedIn</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+<div class="jumbotron">
+    <div class="container">
+        <h1 class="text-center">Vehicle Price Prediction</h1>
+        <p class="text-center">Predicting the price of vehicles in Nigeria</p>
+        <hr />
+
+        <div class="row">
+            <div class="col-lg-12 form-group-lg">
+                <form action="/go" method="get">
+                    
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="inputState">Make</label>
+                            <select name="model_brand_name" id="model_brand_name" class="form-control" required>
+                              {% if request.args.get('mileage', '') %}
+                                <option value="{{ request.args.get('model_brand_name', '') }}">{{ request.args.get('model_brand_name', '') }}</option>
+                              {% else %}
+                                <option value="">Choose...</option>
+                              {% endif %}
+                              <option value="acura">Acura</option>
+                              <option value="audi">Audi</option>
+                              <option value="bmw">Bmw</option>
+                              <option value="cadillac">Cadillac</option>
+                              <option value="chevrolet">Chevrolet</option>
+                              <option value="chrysler">Chrysler</option>
+                              <option value="citroën">Citroën</option>
+                              <option value="daf">Daf</option>
+                              <option value="dodge">Dodge</option>
+                              <option value="ford">Ford</option>
+                              <option value="foton">Foton</option>
+                              <option value="gac ">Gac </option>
+                              <option value="gmc">Gmc</option>
+                              <option value="honda">Honda</option>
+                              <option value="howo">Howo</option>
+                              <option value="hummer">Hummer</option>
+                              <option value="hyundai">Hyundai</option>
+                              <option value="infiniti">Infiniti</option>
+                              <option value="isuzu">Isuzu</option>
+                              <option value="iveco">Iveco</option>
+                              <option value="jac">Jac</option>
+                              <option value="jaguar">Jaguar</option>
+                              <option value="jeep">Jeep</option>
+                              <option value="kia">Kia</option>
+                              <option value="land rover">Land rover</option>
+                              <option value="lexus">Lexus</option>
+                              <option value="lincoln">Lincoln</option>
+                              <option value="mack">Mack</option>
+                              <option value="man">Man</option>
+                              <option value="man diesel">Man diesel</option>
+                              <option value="maserati">Maserati</option>
+                              <option value="mazda">Mazda</option>
+                              <option value="mercedes-benz">Mercedes-benz</option>
+                              <option value="mini">Mini</option>
+                              <option value="mitsubishi">Mitsubishi</option>
+                              <option value="nissan">Nissan</option>
+                              <option value="opel">Opel</option>
+                              <option value="peugeot">Peugeot</option>
+                              <option value="pontiac">Pontiac</option>
+                              <option value="porsche">Porsche</option>
+                              <option value="range rover">Range rover</option>
+                              <option value="renault">Renault</option>
+                              <option value="rover">Rover</option>
+                              <option value="saturn">Saturn</option>
+                              <option value="scania">Scania</option>
+                              <option value="ssangyong">Ssangyong</option>
+                              <option value="subaru">Subaru</option>
+                              <option value="suzukia">Suzuki</option>
+                              <option value="toyota">Toyota</option>
+                              <option value="volkswagen">Volkswagen</option>
+                              <option value="volvo">Volvo</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <label for="inputState">Model</label>
+                            <select name="model_name" id="model_name" class="form-control" required>
+                              {% if request.args.get('mileage', '') %}
+                                <option value="{{ request.args.get('model_name', '') }}">{{ request.args.get('model_name', '') }}</option>
+                              {% else %}
+                                <option value="">Choose...</option>
+                              {% endif %}
+                            </select>
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <label for="inputState">Year</label>
+                            <select name="year" id="year" class="form-control" required>
+                              {% if request.args.get('mileage', '') %}
+                                <option value="{{ request.args.get('year', '') }}">{{ request.args.get('year', '') }}</option>
+                              {% else %}
+                                <option value="">Choose...</option>
+                              {% endif %}
+                              <option value="1970">1970</option>
+                              <option value="1984">1984</option>
+                              <option value="1985">1985</option>
+                              <option value="1988">1988</option>
+                              <option value="1989">1989</option>
+                              <option value="1990">1990</option>
+                              <option value="1991">1991</option>
+                              <option value="1992">1992</option>
+                              <option value="1993">1993</option>
+                              <option value="1994">1994</option>
+                              <option value="1995">1995</option>
+                              <option value="1996">1996</option>
+                              <option value="1997">1997</option>
+                              <option value="1998">1998</option>
+                              <option value="1999">1999</option>
+                              <option value="2000">2000</option>
+                              <option value="2001">2001</option>
+                              <option value="2002">2002</option>
+                              <option value="2003">2003</option>
+                              <option value="2004">2004</option>
+                              <option value="2005">2005</option>
+                              <option value="2006">2006</option>
+                              <option value="2007">2007</option>
+                              <option value="2008">2008</option>
+                              <option value="2009">2009</option>
+                              <option value="2010">2010</option>
+                              <option value="2011">2011</option>
+                              <option value="2012">2012</option>
+                              <option value="2013">2013</option>
+                              <option value="2014">2014</option>
+                              <option value="2015">2015</option>
+                              <option value="2016">2016</option>
+                              <option value="2017">2017</option>
+                              <option value="2018">2018</option>
+                              <option value="2019">2019</option>
+                              <option value="2020">2020</option>
+                              <option value="2021">2021</option>
+                            </select>
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <div class="form-group col-md-4">
+                            <label for="inputState">Transmission</label>
+                            <select name="transmission" id="transmission" class="form-control" required>
+                              {% if request.args.get('mileage', '') %}
+                                <option value="{{ request.args.get('transmission', '') }}">{{ request.args.get('transmission', '') }}</option>
+                              {% else %}
+                                <option value="">Choose...</option>
+                              {% endif %}{% if request.args.get('mileage', '') %}
+                                <option value="{{ request.args.get('transmission', '') }}">{{ request.args.get('transmission', '') }}</option>
+                              {% else %}
+                                <option value="">Choose...</option>
+                              {% endif %}
+                              <option value="automatic">Automatic</option>
+                              <option value="manual">Manual</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <label for="inputState">Engine Type</label>
+                            <select name="engine_type" id="engine_type" class="form-control" required>
+                              {% if request.args.get('mileage', '') %}
+                                <option value="{{ request.args.get('engine_type', '') }}">{{ request.args.get('engine_type', '') }}</option>
+                              {% else %}
+                                <option value="">Choose...</option>
+                              {% endif %}
+                              <option value="10-cylinder(v10)">10-cylinder(v10)</option>
+                              <option value="12-cylinder(v12)">12-cylinder(v12)</option>
+                              <option value="18-cylinder(v18)">18-cylinder(v18)</option>
+                              <option value="3-cylinder(i3)">3-cylinder(i3)</option>
+                              <option value="4-cylinder(h4)">4-cylinder(h4)</option>
+                              <option value="4-cylinder(i4)">4-cylinder(i4)</option>
+                              <option value="5-cylinder(i5)">5-cylinder(i5)</option>
+                              <option value="6-cylinder(h6)">6-cylinder(h6)</option>
+                              <option value="6-cylinder(i6)">6-cylinder(i6)</option>
+                              <option value="6-cylinder(v6)">6-cylinder(v6)</option>
+                              <option value="8-cylinder(i8)">8-cylinder(i8)</option>
+                              <option value="8-cylinder(v8)">8-cylinder(v8)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <label for="inputState">Body Type</label>
+                            <select name="body_type" id="body_type" class="form-control" required>
+                              {% if request.args.get('mileage', '') %}
+                                <option value="{{ request.args.get('body_type', '') }}">{{ request.args.get('body_type', '') }}</option>
+                              {% else %}
+                                <option value="">Choose...</option>
+                              {% endif %}
+                              <option value="bus">Bus</option>
+                              <option value="convertible">Convertible</option>
+                              <option value="coupe">Coupe</option>
+                              <option value="crossover">Crossover</option>
+                              <option value="hatchback">Hatchback</option>
+                              <option value="minivan">Minivan</option>
+                              <option value="pickup">Pickup</option>
+                              <option value="sedan">Sedan</option>
+                              <option value="station wagon">Station wagon</option>
+                              <option value="suv">Suv</option>
+                              <option value="truck">Truck</option>
+                              <option value="other">Other</option>
+                            </select>
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <div class="form-group col-md-4">
+                            <label for="inputState">Mileage</label>
+                            <input id="mileage" value="{{ request.args.get('mileage', '') }}" name="mileage" type="text" class="form-control" required>
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <label for="inputState">Mileage Unit</label>
+                            <select name="mileage_unit" id="mileage_unit" class="form-control" required>
+                              {% if request.args.get('mileage', '') %}
+                                <option value="{{ request.args.get('mileage_unit', '') }}">{{ request.args.get('mileage_unit', '') }}</option>
+                              {% else %}
+                                <option value="">Choose...</option>
+                              {% endif %}
+                              <option value="km">Kilometers</option>
+                              <option value="miles">Miles</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <label for="inputState">Fuel Type</label>
+                            <select name="fuel_type" id="fuel_type" class="form-control" required>
+                              {% if request.args.get('mileage', '') %}
+                                <option value="{{ request.args.get('fuel_type', '') }}">{{ request.args.get('fuel_type', '') }}</option>
+                              {% else %}
+                                <option value="">Choose...</option>
+                              {% endif %}
+                              <option value="diesel">Diesel</option>
+                              <option value="petrol">Petrol</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="inputState">Grade Score</label>
+                            <select name="grade_score" id="grade_score" class="form-control" required>
+                              {% if request.args.get('mileage', '') %}
+                                <option value="{{ request.args.get('grade_score', '') }}">{{ request.args.get('grade_score', '') }}</option>
+                              {% else %}
+                                <option value="">Choose...</option>
+                              {% endif %}
+                              <option value="1">1</option>
+                              <option value="2">2</option>
+                              <option value="3">3</option>
+                              <option value="4">4</option>
+                              <option value="5">5</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <label for="inputState">First Owner</label>
+                            <select name="first_owner" id="first_owner" class="form-control" required>
+                              {% if request.args.get('mileage', '') %}
+                                <option value="{{ request.args.get('first_owner', '') }}">{{ request.args.get('first_owner', '') }}</option>
+                              {% else %}
+                                <option value="">Choose...</option>
+                              {% endif %}
+                              <option value="true">True</option>
+                              <option value="false">False</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <label for="inputState">Selling Condition</label>
+                            <select name="selling_condition" id="selling_condition" class="form-control" required>
+                              {% if request.args.get('mileage', '') %}
+                                <option value="{{ request.args.get('selling_condition', '') }}">{{ request.args.get('selling_condition', '') }}</option>
+                              {% else %}
+                                <option value="">Choose...</option>
+                              {% endif %}
+                              <option value="foreign">Foreign</option>
+                              <option value="local">Local</option>
+                              <option value="new">New</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="inputState">Interior Color</label>
+                            <select name="interior_color" id="interior_color" class="form-control" required>
+                              {% if request.args.get('mileage', '') %}
+                                <option value="{{ request.args.get('interior_color', '') }}">{{ request.args.get('interior_color', '') }}</option>
+                              {% else %}
+                                <option value="">Choose...</option>
+                              {% endif %}
+                              <option value="almond">Almond</option>
+                              <option value="ash">Ash</option>
+                              <option value="ash & grey">Ash & grey</option>
+                              <option value="beige">Beige</option>
+                              <option value="beige and black">Beige & black</option>
+                              <option value="black">Black</option>
+                              <option value="black & blue">Black & blue</option>
+                              <option value="black & brown">Black & brown</option>
+                              <option value="black & grey">Black & grey</option>
+                              <option value="black & maroon">Black & maroon</option>
+                              <option value="black & orange">Black & orange</option>
+                              <option value="black & red">Black & red</option>
+                              <option value="blue">Blue</option>
+                              <option value="blue & grey">Blue & grey</option>
+                              <option value="brown">Brown</option>
+                              <option value="cream">Cream</option>
+                              <option value="cream & ash">Cream & ash</option>
+                              <option value="cream & black">Cream & black</option>
+                              <option value="gold">Gold</option>
+                              <option value="green">Green</option>
+                              <option value="grey">Grey</option>
+                              <option value="ivory">Ivory</option>
+                              <option value="Maroon">Maroon</option>
+                              <option value="off-white">Off-white</option>
+                              <option value="orange">Orange</option>
+                              <option value="parchment">Parchment</option>
+                              <option value="pearl">Pearl</option>
+                              <option value="red">Red</option>
+                              <option value="silver">Silver</option>
+                              <option value="tan">Tan</option>
+                              <option value="white">White</option>
+                              <option value="white & black">White & black</option>
+                              <option value="white & brown">White & brown</option>
+                              <option value="yellow">Yellow</option>
+                              <option value="other">Other</option>
+                            </select>
+                        </div>
+
+                        
+                    </div>
+                    <div class="form-row">
+                        <button type="submit" class="btn btn-success form-control">Predict</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        {% block message %}
+        {% endblock %}
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 form-group-lg">
+            {% block content %}
+            <div class="page-header">
+                <h1 class="text-center">Overview of Training Dataset</h1>
+            </div>
+            {% endblock %}
+
+            {% for id in ids %}
+                <div class="img-fluid" id="{{id}}"></div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    const graphs = {{graphJSON | safe}};
+    const ids = {{ids | safe}};
+    for(let i in graphs) {
+        Plotly.plot(ids[i], graphs[i].data, graphs[i].layout);
+    }
+</script>
+
+
+<script>
+    $(document).ready(function () {
+        $("#model_brand_name").change(function () {
+            var val = $(this).val();
+            if (val == "acura") {
+                $("#model_name").html("<option value='MDX'>MDX</option>\
+                                    <option value='rdx'>RDX</option>\
+                                    <option value='tl'>TL</option>\
+                                    <option value='zdx'>ZDX</option>\
+                                    <option value='rl'>RL</option>\
+                                    <option value='tsx'>TSX</option>\
+                                    ");
+            } else if (val == "audi") {
+                $("#model_name").html("<option value='q5'>Q5</option>\
+                                    <option value='a3'>A3</option>\
+                                    <option value='a6'>A6</option>\
+                                    <option value='q7'>Q7</option>\
+                                    ");
+            } else if (val == "bmw") {
+                $("#model_name").html("<option value='325'>325</option>\
+                                    <option value='328'>328</option>\
+                                    <option value='335'>335</option>\
+                                    <option value='435 gran coupé'>435 gran coupé</option>\
+                                    <option value='520'>520</option>\
+                                    <option value='525'>525</option>\
+                                    <option value='528'>528</option>\
+                                    <option value='535'>535</option>\
+                                    <option value='550 gran turismo'>550 gran turismo</option>\
+                                    <option value='640'>640</option>\
+                                    <option value='650'>650</option>\
+                                    <option value='730'>730</option>\
+                                    <option value='750'>750</option>\
+                                    <option value='x1'>X1</option>\
+                                    <option value='x3'>X3</option>\
+                                    <option value='x4'>X4</option>\
+                                    <option value='x5'>X5</option>\
+                                    <option value='x5'>X5</option>\
+                                    ");
+            } else if (val == "cadillac") {
+                $("#model_name").html("<option value='escalade'>Escalade</option>\
+                                    <option value='srx'>Srx</option>\
+                                    ");
+            } else if (val == "chevrolet") {
+                $("#model_name").html("<option value='avalanche'>Avalanche</option>\
+                                    <option value='camaro'>Camaro</option>\
+                                    <option value='cruze'>Cruze</option>\
+                                    <option value='equinox'>Equinox</option>\
+                                    <option value='silverado'>Silverado</option>\
+                                    <option value='tahoe'>Tahoe</option>\
+                                    <option value='tracker'>Tracker</option>\
+                                    <option value='traverse'>Traverse</option>\
+                                    <option value='trax'>Trax</option>\
+                                    ");
+            } else if (val == "chrysler") {
+                $("#model_name").html("<option value='300 m'>300 m</option>\
+                                    <option value='300c'>300c</option>\
+                                    <option value='sebring'>Sebring</option>\
+                                    <option value='town'>Town</option>\
+                                    ");
+            } else if (val == "citroën") {
+                $("#model_name").html("<option value='jumper'>Jumper</option>\
+                                    ");
+            } else if (val == "daf") {
+                $("#model_name").html("<option value='45'>45</option>\
+                                    <option value='95xf tractor head'>95xf tractor head</option>\
+                                    <option value='a'>A</option>\
+                                    <option value='cf85'>cf85</option>\
+                                    <option value='xf tractor head'>xf tractor head</option>\
+                                    ");
+            } else if (val == "dodge") {
+                $("#model_name").html("<option value='caliber'>Caliber</option>\
+                                    <option value='charger'>Charger</option>\
+                                    <option value='Grand caravan'>grand caravan</option>\
+                                    <option value='Nitro'>nitro</option>\
+                                    ");
+            } else if (val == "ford") {
+                $("#model_name").html("<option value='e 150'>e 150</option>\
+                                    <option value='e 250'>e 250</option>\
+                                    <option value='e 350'>e 350</option>\
+                                    <option value='econoline'>Cconoline</option>\
+                                    <option value='edge'>Edge</option>\
+                                    <option value='escape'>Escape</option>\
+                                    <option value='explorer'>Explorer</option>\
+                                    <option value='f 150'>f 150</option>\
+                                    <option value='f 350'>f 350</option>\
+                                    <option value='fiesta'>Fiesta</option>\
+                                    <option value='flex'>Flex</option>\
+                                    <option value='focus'>Focus</option>\
+                                    <option value='fusion'>Fusion</option>\
+                                    <option value='kuga'>Kuga</option>\
+                                    <option value='mustang'>Mustang</option>\
+                                    <option value='taurus'>Taurus</option>\
+                                    <option value='transit'>Transit</option>\
+                                    <option value='transit connect'>Transit connect</option>\
+                                    ");
+            } else if (val == "foton") {
+                $("#model_name").html("<option value='1069'>1069</option>\
+                                    ");
+            } else if (val == "gac") {
+                $("#model_name").html("<option value='gs8'>gs8</option>\
+                                    ");
+            } else if (val == "gmc") {
+                $("#model_name").html("<option value='acadia'>Acadia</option>\
+                                    <option value='yukon'>Yukon</option>\
+                                    ");
+            } else if (val == "honda") {
+                $("#model_name").html("<option value='accord'>Accord</option>\
+                                    <option value='civic'>Civic</option>\
+                                    <option value='cr-v'>cr-V</option>\
+                                    <option value='crosstour'>Crosstour</option>\
+                                    <option value='element'>Element</option>\
+                                    <option value='fit'>Fit</option>\
+                                    <option value='odyssey'>Odyssey</option>\
+                                    <option value='pilot'>Pilot</option>\
+                                    <option value='ridgeline'>Ridgeline</option>\
+                                    <option value='stream'>Stream</option>\
+                                    ");
+            } else if (val == "howo") {
+                $("#model_name").html("<option value='sinotruck'>sinotruck</option>\
+                                    ");
+            } else if (val == "hummer") {
+                $("#model_name").html("<option value='h2'>h2</option>\
+                                    <option value='h3'>h3</option>\
+                                    ");
+            } else if (val == "hyundai") {
+                $("#model_name").html("<option value='accent'>Accent</option>\
+                                    <option value='azera'>Azera</option>\
+                                    <option value='creta'>Creta</option>\
+                                    <option value='elantra'>Elantra</option>\
+                                    <option value='genesis'>Genesis</option>\
+                                    <option value='grandeur'>Grandeur</option>\
+                                    <option value='i10'>i10</option>\
+                                    <option value='i20'>i20</option>\
+                                    <option value='ix35'>ix35</option>\
+                                    <option value='santa fe'>Santa fe</option>\
+                                    <option value='sonata'>Sonata</option>\
+                                    <option value='tucson'>Tucson</option>\
+                                    <option value='veloster'>Veloster</option>\
+                                    <option value='veracruz'>Veracruz</option>\
+                                    ");
+            } else if (val == "infiniti") {
+                $("#model_name").html("<option value='fx'>fx</option>\
+                                    <option value='fx 35'>fx 35</option>\
+                                    <option value='g35'>g35</option>\
+                                    <option value='jx'>jx</option>\
+                                    <option value='m37'>m37</option>\
+                                    <option value='qx30'>qx30</option>\
+                                    <option value='qx56'>qx56</option>\
+                                    <option value='qx80'>qx80</option>\
+                                    ");
+            } else if (val == "isuzu") {
+                $("#model_name").html("<option value='cabster'>Cabster</option>\
+                                    <option value='npr'>npr</option>\
+                                    <option value='nqr'>nqr</option>\
+                                    ");
+            } else if (val == "iveco") {
+                $("#model_name").html("<option value='eurostar'>Eurostar</option>\
+                                    <option value='eurotech'>Eurotech</option>\
+                                    <option value='truck'>Truck</option>\
+                                    ");
+            } else if (val == "jac") {
+                $("#model_name").html("<option value='t6'>t6</option>\
+                                    ");
+            } else if (val == "jaguar") {
+                $("#model_name").html("<option value='s-typ'>s-typ</option>\
+                                    <option value='xe'>xe</option>\
+                                    <option value='xj'>xj</option>\
+                                    <option value='xj8'>xj8</option>\
+                                    ");
+            } else if (val == "jeep") {
+                $("#model_name").html("<option value='wrangler'>Wrangler</option>\
+                                    ");
+            } else if (val == "kia") {
+                $("#model_name").html("<option value='cerato'>Cerato</option>\
+                                    <option value='k2700'>k2700</option>\
+                                    <option value='optima'>Optima</option>\
+                                    <option value='quoris'>Quoris</option>\
+                                    <option value='rio'>Rio</option>\
+                                    <option value='sorento'>Sorento</option>\
+                                    <option value='soul'>Soul</option>\
+                                    <option value='spectra'>Spectra</option>\
+                                    <option value='sportage'>Sportage</option>\
+                                    ");
+            } else if (val == "land rover") {
+                $("#model_name").html("<option value='defender'>Defender</option>\
+                                    <option value='discovery'>Discovery</option>\
+                                    <option value='freelander'>Feelander</option>\
+                                    <option value='lr 3 , series se'>lr 3 , series se</option>\
+                                    <option value='range rover'>Range rover</option>\
+                                    <option value='range rover autobiography'>Range rover autobiography</option>\
+                                    <option value='range rover evoque'>Range rover evoque</option>\
+                                    <option value=''range rover sport'>Range rover sport</option>\
+                                    <option value='range rover velar'>Range rover velar</option>\
+                                    <option value='range rover vogue'>Range rover vogue</option>\
+                                    <option value='serie iii'>Serie iii</option>\
+                                    ");
+            } else if (val == "lexus") {
+                $("#model_name").html("<option value='ct 200h'>ct 200h</option>\
+                                    <option value='es 250'>es 250</option>\
+                                    <option value='es 300'>es 300</option>\
+                                    <option value='es 330'>es 330</option>\
+                                    <option value='es 350'>es 350</option>\
+                                    <option value='gs 300'>gs 300</option>\
+                                    <option value='gs 350'>gs 350</option>\
+                                    <option value='gs 460'>gs 460</option>\
+                                    <option value='gx 460'>gx 460</option>\
+                                    <option value='gx 470'>gx 470</option>\
+                                    <option value='hs 250h'>hs 250h</option>\
+                                    <option value='is 250'>is 250</option>\
+                                    <option value='is 350'>is 350</option>\
+                                    <option value='ls 460'>ls 460</option>\
+                                    <option value='ls 500'>ls 500</option>\
+                                    <option value='lx 470'>lx 470</option>\
+                                    <option value='lx 570'>lx 570</option>\
+                                    <option value='nx 200'>nx 200</option>\
+                                    <option value='nx 300'>nx 300</option>\
+                                    <option value='rx 300'>rx 300</option>\
+                                    <option value='rx 330'>rx 330</option>\
+                                    <option value='rx 350'>rx 350</option>\
+                                    <option value='rx 400'>rx 400</option>\
+                                    ");
+            } else if (val == "lincoln") {
+                $("#model_name").html("<option value='mark'>Mark</option>\
+                                    <option value='mkx'>mkx</option>\
+                                    <option value='mkz'>mkz</option>\
+                                    <option value='town car'>Town car</option>\
+                                    ");
+            } else if (val == "mack") {
+                $("#model_name").html("<option value='ch612'>ch612</option>\
+                                    <option value='mkch613x'>ch613</option>\
+                                    <option value='ch613 conventional cab'>ch613 conventional cab</option>\
+                                    <option value='cxn613'>cxn613</option>\
+                                    ");
+            } else if (val == "man") {
+                $("#model_name").html("<option value='19-414'>19-414</option>\
+                                    <option value='26.372'>26.372</option>\
+                                    <option value='bockmann'>bockmann</option>\
+                                    ");
+            } else if (val == "man diesel") {
+                $("#model_name").html("<option value='19.314 filt-n'>19.314 filt-n</option>\
+                                    ");
+            } else if (val == "maserati") {
+                $("#model_name").html("<option value='levante'>levante</option>\
+                                    ");
+            } else if (val == "mazda") {
+                $("#model_name").html("<option value='3'>3</option>\
+                                    <option value='323'>323</option>\
+                                    <option value='5'>5</option>\
+                                    <option value='6'>6</option>\
+                                    <option value='626'>626</option>\
+                                    <option value='cx-7'>cx-7</option>\
+                                    <option value='cx-9'>cx-9</option>\
+                                    <option value='premacy'>premacy</option>\
+                                    <option value='tribute'>tribute</option>\
+                                    ");
+            } else if (val == "mercedes-benz") {
+                $("#model_name").html("<option value='1017'>1017</option>\
+                                    <option value='1117'>1117</option>\
+                                    <option value='1217'>1217</option>\
+                                    <option value='1420'>1420</option>\
+                                    <option value='1722'>1722</option>\
+                                    <option value='1726 water tanker'>1726 water tanker</option>\
+                                    <option value='2626 dump truck'>2626 dump truck</option>\
+                                    <option value='300'>300</option>\
+                                    <option value='320'>320</option>\
+                                    <option value='350'>350</option>\
+                                    <option value='450'>450</option>\
+                                    <option value='608d'>608d</option>\
+                                    <option value='613d'>613d</option>\
+                                    <option value='709 db'>709 db</option>\
+                                    <option value='814'>814</option>\
+                                    <option value='816'>816</option>\
+                                    <option value='a 160'>a 160</option>\
+                                    <option value='actros'>actros</option>\
+                                    <option value='b 200'>b 200</option>\
+                                    <option value='c 180'>c 180</option>\
+                                    <option value='c 200'>c 200</option>\
+                                    <option value='c 230'>c 230</option>\
+                                    <option value='c 240'>c 240</option>\
+                                    <option value='c 250'>c 250</option>\
+                                    <option value='c 280'>c 280</option>\
+                                    <option value='c 300'>c 300</option>\
+                                    <option value='c 320'>c 320</option>\
+                                    <option value='c 350'>c 350</option>\
+                                    <option value='c 400'>c 400</option>\
+                                    <option value='c 43 amg'>c 43 amg</option>\
+                                    <option value='c 63 amg'>c 63 amg</option>\
+                                    <option value='cla 250'>cla 250</option>\
+                                    <option value='cla 45 amg'>cla 45 amg</option>\
+                                    <option value='clk 320'>clk 320</option>\
+                                    <option value='clk 350'>clk 350</option>\
+                                    <option value='cls 350'>cls 350</option>\
+                                    <option value='cls 500'>cls 500</option>\
+                                    <option value='cls 500 shooting brake'>cls 500 shooting brake</option>\
+                                    <option value='cls 550'>cls 550</option>\
+                                    <option value='e 300'>e 300</option>\
+                                    <option value='e 320'>e 320</option>\
+                                    <option value='e 350'>e 350</option>\
+                                    <option value='e 450'>e 450</option>\
+                                    <option value='g 500'>g 500</option>\
+                                    <option value='g 55 amg'>g 55 amg</option>\
+                                    <option value='g 550'>g 550</option>\
+                                    <option value='g 63 amg'>g 63 amg</option>\
+                                    <option value='gl 350'>gl 350</option>\
+                                    <option value='gl 450'>gl 450</option>\
+                                    <option value='gl 550'>gl 550</option>\
+                                    <option value='gl 63 amg'>gl 63 amg</option>\
+                                    <option value='gla 250'>gla 250</option>\
+                                    <option value='glc 250'>glc 250</option>\
+                                    <option value='glc 300'>glc 300</option>\
+                                    <option value='glc 43 amg'>glc 43 amg</option>\
+                                    <option value='gle 350'>gle 350</option>\
+                                    <option value='gle 400'>gle 400</option>\
+                                    <option value='gle 43 amg'>gle 43 amg</option>\
+                                    <option value='gle 450'>gle 450</option>\
+                                    <option value='gle 53 amg'>gle 53 amg</option>\
+                                    <option value='gle 63 amg'>gle 63 amg</option>\
+                                    <option value='glk 350'>glk 350</option>\
+                                    <option value='gls 450'>gls 450</option>\
+                                    <option value='ml 320'>ml 320</option>\
+                                    <option value='ml 350'>ml 350</option>\
+                                    <option value='ml 400'>ml 400</option>\
+                                    <option value='ml 500'>ml 500</option>\
+                                    <option value='ml 63 amg'>ml 63 amg</option>\
+                                    <option value='r 350'>r 350</option>\
+                                    <option value='r 500'>r 500</option>\
+                                    <option value='s 500'>s 500</option>\
+                                    <option value='s 550'>s 550</option>\
+                                    <option value='s 600'>s 600</option>\
+                                    <option value='sl 400'>sl 400</option>\
+                                    <option value='slk 250'>slk 250</option>\
+                                    <option value='slk 280'>1slk 28017</option>\
+                                    <option value='sprinter'>Sprinter</option>\
+                                    <option value='vito'>Vito</option>\
+                                    ");
+            } else if (val == "mini") {
+                $("#model_name").html("<option value='cooper'>Cooper</option>\
+                                    <option value='cooper countryman'>Cooper countryman</option>\
+                                    <option value='cooper coupé'>Sooper coupé</option>\
+                                    <option value='cooper s'>Cooper s</option>\
+                                    ");
+            } else if (val == "mitsubishi") {
+                $("#model_name").html("<option value='canter'>Canter</option>\
+                                    <option value='eclipse'>Eclipse</option>\
+                                    <option value='endeavor'>Endeavor</option>\
+                                    <option value='l200'>l200</option>\
+                                    <option value='l300'>l300</option>\
+                                    <option value='montero'>Montero</option>\
+                                    <option value='outlander'>Outlander</option>\
+                                    <option value='pajero'>Pajero</option>\
+                                    <option value='raider'>raider</option>\
+                                    ");
+            } else if (val == "nissan") {
+                $("#model_name").html("<option value='almera'>Almera</option>\
+                                    <option value='altima'>Altima</option>\
+                                    <option value='armada'>Armada</option>\
+                                    <option value='cabstar'>Cabstar</option>\
+                                    <option value='frontier'>Frontier</option>\
+                                    <option value='juke'>Juke</option>\
+                                    <option value='maxima'>Maxima</option>\
+                                    <option value='micra'>Micra</option>\
+                                    <option value='murano'>Murano</option>\
+                                    <option value='nv3500'>nv3500</option>\
+                                    <option value='pathfinder'>Pathfinder</option>\
+                                    <option value='primastar'>Primastar</option>\
+                                    <option value='primera'>Primera</option>\
+                                    <option value='rogue'>Rogue</option>\
+                                    <option value='sentra'>Sentra</option>\
+                                    <option value='teana'>Teana</option>\
+                                    <option value='titan'>Titan</option>\
+                                    <option value='urvan'>Urvan</option>\
+                                    <option value='versa'>Versa</option>\
+                                    <option value='xterra'>xterra</option>\
+                                    ");
+            } else if (val == "opel") {
+                $("#model_name").html("<option value='tigra'>Tigra</option>\
+                                    <option value='zafira'>Zafira</option>\
+                                    <option value='zafira life'>Zafira life</option>\
+                                    ");
+            } else if (val == "peugeot") {
+                $("#model_name").html("<option value='206'>206</option>\
+                                    <option value='207'>207</option>\
+                                    <option value='307'>307</option>\
+                                    <option value='406'>406</option>\
+                                    <option value='407'>407</option>\
+                                    <option value='508'>508</option>\
+                                    <option value='807'>807</option>\
+                                    <option value='traveller'>Traveller</option>\
+                                    ");
+            } else if (val == "pontiac") {
+                $("#model_name").html("<option value='vibe'>Vibe</option>\
+                                    ");
+            } else if (val == "porsche") {
+                $("#model_name").html("<option value='cayenne'>Cayenne</option>\
+                                    ");
+            } else if (val == "range rover") {
+                $("#model_name").html("<option value='hse lr4'>hse lr4</option>\
+                                    ");
+            } else if (val == "renault") {
+                $("#model_name").html("<option value='twingo'>Twingo</option>\
+                                    ");
+            } else if (val == "rover") {
+                $("#model_name").html("<option value='600'>600</option>\
+                                    ");
+            } else if (val == "saturn") {
+                $("#model_name").html("<option value='relay'>Relay</option>\
+                                    ");
+            } else if (val == "scania") {
+                $("#model_name").html("<option value='p113'>p113</option>\
+                                    ");
+            } else if (val == "seat") {
+                $("#model_name").html("<option value='ibiza'>Ibiza</option>\
+                                    ");
+            } else if (val == "ssangyong") {
+                $("#model_name").html("<option value='rexton'>Rexton</option>\
+                                    ");
+            } else if (val == "subaru") {
+                $("#model_name").html("<option value='outback'>Outback</option>\
+                              ");   
+            } else if (val == "suzuki") {
+                $("#model_name").html("<option value='sx4'>sx4</option>\
+                              ");   
+            } else if (val == "toyota") {
+                $("#model_name").html("<option value='4-runner'>4-runner</option>\
+                                    <option value='avalon'>Avalon</option>\
+                                    <option value='avanza'>Avanza</option>\
+                                    <option value='avensis'>Avensis</option>\
+                                    <option value='avensis verso'>Avensis verso</option>\
+                                    <option value='c-hr'>c-hr</option>\
+                                    <option value='camry'>Camry</option>\
+                                    <option value='coaster'>Coaster</option>\
+                                    <option value='corolla'>Corolla</option>\
+                                    <option value='corolla im'>Corolla im</option>\
+                                    <option value='corolla verso'>Corolla verso</option>\
+                                    <option value='dyna'>Dyna</option>\
+                                    <option value='echo'>Echo</option>\
+                                    <option value='fj'>fj</option>\
+                                    <option value='fj cruiser'>fj cruiser</option>\
+                                    <option value='fortuner'>Fortuner</option>\
+                                    <option value='hiace'>Hiace</option>\
+                                    <option value='highlander'>Highlander</option>\
+                                    <option value='hilux'>Hilux</option>\
+                                    <option value='land cruiser'>Land cruiser</option>\
+                                    <option value='landcruiser prado'>Landcruiser prado</option>\
+                                    <option value='matrix'>Matrix</option>\
+                                    <option value='noah'>Noah</option>\
+                                    <option value='picnic'>Picnic</option>\
+                                    <option value='prado'>Prado</option>\
+                                    <option value='previa'>Previa</option>\
+                                    <option value='rav 4'>Rav 4</option>\
+                                    <option value='scion'>Scion</option>\
+                                    <option value='sequoia'>Sequoia</option>\
+                                    <option value='sienna'>Sienna</option>\
+                                    <option value='solara'>Solara</option>\
+                                    <option value='tacoma'>Tacoma</option>\
+                                    <option value='tundra'>Tundra</option>\
+                                    <option value='venza'>Venza</option>\
+                                    <option value='yaris'>Yaris</option>\
+                                    ");
+            } else if (val == "volkswagen") {
+                $("#model_name").html("<option value='beetle'>Beetle</option>\
+                                    <option value='cc'>cc</option>\
+                                    <option value='golf'>Golf</option>\
+                                    <option value='golf plus'>Golf plus</option>\
+                                    <option value='jetta'>Jetta</option>\
+                                    <option value='lt'>lt</option>\
+                                    <option value='passat'>Passat</option>\
+                                    <option value='passat cc'>Passat cc</option>\
+                                    <option value='routan'>Routan</option>\
+                                    <option value='sharan'>Sharan</option>\
+                                    <option value='t4 california'>t4 california</option>\
+                                    <option value='t4 caravelle'>t4 caravelle</option>\
+                                    <option value='t4 multivan'>t4 multivan</option>\
+                                    <option value='t4 other'>t4 other</option>\
+                                    <option value='t5 transporter'>t5 transporter</option>\
+                                    <option value='t6 transporter'>t6 transporter</option>\
+                                    <option value='tiguan'>Tiguan</option>\
+                                    <option value='touareg'>Touareg</option>\
+                                    ");
+            } else if (val == "volvo") {
+                $("#model_name").html("<option value='965'>965</option>\
+                                    <option value='c70'>c70</option>\
+                                    <option value='fh12'>fh12</option>\
+                                    <option value='fl10'>fl10</option>\
+                                    <option value='fl12'>fl12</option>\
+                                    <option value='fl6'>fl6</option>\
+                                    <option value='fl7'>fl7</option>\
+                                    <option value='s60'>s60</option>\
+                                    <option value='s80'>s80</option>\
+                                    <option value='v50'>v50</option>\
+                                    <option value='xc60'>xc60</option>\
+                                    <option value='xc90'>xc90</option>\
+                                    ");
+            }
+        });
+    });
+</script>
+
+
+</body>
+</html>
